@@ -33,11 +33,11 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/borda1"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Usuario"
             android:inputType="textEmailAddress"
             android:paddingStart="30dp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
             android:textSize="24sp" />
 
         <EditText
@@ -50,9 +50,9 @@
             android:hint="Senha"
             android:inputType="textPassword"
             android:paddingStart="30dp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
             android:textSize="24sp" />
 
         <Button
@@ -71,7 +71,7 @@
             android:layout_marginTop="40dp"
             android:text="Esqueci minha senha"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

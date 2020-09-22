@@ -1,14 +1,16 @@
-package dev.marcelo.superflix;
+package dev.marcelo.superflix.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Principal extends AppCompatActivity {
+import dev.marcelo.superflix.R;
+
+public class TelaPrincipal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.principal);
+        setContentView(R.layout.tela_principal);
     }
 }
