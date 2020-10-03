@@ -1,4 +1,4 @@
-package dev.marcelo.superflix.domain;
+package dev.marcelo.superflix.view;
 
 import android.os.Bundle;
 

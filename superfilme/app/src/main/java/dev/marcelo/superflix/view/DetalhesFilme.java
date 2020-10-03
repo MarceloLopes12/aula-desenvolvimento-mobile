@@ -1,4 +1,4 @@
-package dev.marcelo.superflix.domain;
+package dev.marcelo.superflix.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -17,9 +17,11 @@ public class DetalhesFilme extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
+
+        onclickInsereFilme();
     }
 
-    public void onclickInsereFilme(View v) {
+    public void onclickInsereFilme() {
         Filme filme = new Filme("Poeira em Alto-Mar", "Lorem ipsum dollor sit amet.", "", 2020, 1234);
         Intent it = new Intent();
 

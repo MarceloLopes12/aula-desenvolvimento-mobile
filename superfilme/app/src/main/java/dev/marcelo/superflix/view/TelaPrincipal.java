@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import dev.marcelo.superflix.R;
-import dev.marcelo.superflix.domain.DetalhesFilme;
-import dev.marcelo.superflix.domain.Login;
-import dev.marcelo.superflix.domain.exception.SenhaIncorretaException;
-import dev.marcelo.superflix.domain.exception.UsuarioNaoEncontradoException;
 
 public class TelaPrincipal extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package dev.marcelo.superflix.domain;
+package dev.marcelo.superflix.domain.model;
 
 public class Usuario {
 
