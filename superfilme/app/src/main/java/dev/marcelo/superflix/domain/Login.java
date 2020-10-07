@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import dev.marcelo.superflix.domain.exception.SenhaIncorretaException;
 import dev.marcelo.superflix.domain.exception.UsuarioNaoEncontradoException;
-import dev.marcelo.superflix.domain.model.Usuario;
 
 public class Login {
 
