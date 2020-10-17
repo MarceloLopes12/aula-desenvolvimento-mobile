@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import dev.marcelo.superflix.R;
+import dev.marcelo.superflix.ui.detalhesFilme.DetalhesFilmeActivity;
 
 public class TelaPrincipal extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
     private void montarTelaDetalhes() {
-        Intent intent = new Intent(this, DetalhesFilme.class);
+        Intent intent = new Intent(this, DetalhesFilmeActivity.class);
         startActivity(intent);
     }
 }

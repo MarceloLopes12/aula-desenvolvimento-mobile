@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class FilmeFragment extends Fragment {
     public static FilmeFragment newInstance(Filme param1) {
         FilmeFragment fragment = new FilmeFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_PARAM1, param1);
+        args.putParcelable(ARG_PARAM1, (Parcelable) param1);
         fragment.setArguments(args);
         return fragment;
     }

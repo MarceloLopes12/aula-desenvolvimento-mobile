@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.listaFilmes.ListaFilmesActivity"></activity>
+        <activity android:name=".ui.detalhesFilme.DetalhesFilmeActivity"></activity>
         <activity android:name=".ui.TelaSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
