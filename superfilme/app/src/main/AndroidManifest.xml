@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".ui.login.TelaLogin" />
         <activity android:name=".ui.listaCategorias.ListaCategoriasActivity" />
+        <activity android:name=".ui.listaFavoritos.ListaFavoritosActivity" />
     </application>
 
 </manifest>

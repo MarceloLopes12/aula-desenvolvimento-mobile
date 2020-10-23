@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import dev.marcelo.superflix.R;
-import dev.marcelo.superflix.domain.model.Filme;
+import dev.marcelo.superflix.data.model.Filme;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,9 +56,9 @@ public class FilmeFragment extends Fragment {
         if(filme != null) {
             TextView tv;
             tv = this.getActivity().findViewById(R.id.tvNome);
-            tv.setText(filme.nome);
+            tv.setText(filme.getTitulo());
             tv = this.getActivity().findViewById(R.id.tvDescricao);
-            tv.setText(filme.descricao);
+            tv.setText("");
         }
     }
 
@@ -74,9 +74,9 @@ public class FilmeFragment extends Fragment {
         if(filme != null) {
             TextView tv;
             tv = this.getActivity().findViewById(R.id.tvNome);
-            tv.setText(filme.nome);
+            tv.setText(filme.getTitulo());
             tv = this.getActivity().findViewById(R.id.tvDescricao);
-            tv.setText(filme.descricao);
+            tv.setText("");
         }
     }
 }

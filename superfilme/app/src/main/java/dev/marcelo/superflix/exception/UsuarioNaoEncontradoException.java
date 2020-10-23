@@ -1,4 +1,4 @@
-package dev.marcelo.superflix.domain.exception;
+package dev.marcelo.superflix.exception;
 
 public class UsuarioNaoEncontradoException extends Exception {
 

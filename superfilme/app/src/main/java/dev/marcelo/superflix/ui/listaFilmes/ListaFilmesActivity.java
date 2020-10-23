@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import dev.marcelo.superflix.data.network.ApiService;
 import dev.marcelo.superflix.data.network.response.filme.FilmesResult;
 import dev.marcelo.superflix.ui.detalhesFilme.DetalhesFilmeActivity;
 import dev.marcelo.superflix.ui.listaCategorias.ListaCategoriasActivity;
+import dev.marcelo.superflix.ui.listaFavoritos.ListaFavoritosActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,4 +82,11 @@ public class ListaFilmesActivity extends AppCompatActivity
         intent.putExtra(DetalhesFilmeActivity.EXTRA_FILME, filme);
         startActivity(intent);
     }
+
+
+    public void onFavoritoClicado(View view) {
+        Intent intent = new Intent( this, ListaFavoritosActivity.class);
+        startActivity(intent);
+    }
+
 }

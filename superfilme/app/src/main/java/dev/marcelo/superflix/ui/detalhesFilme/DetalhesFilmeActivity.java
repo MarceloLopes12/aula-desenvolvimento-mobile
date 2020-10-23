@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import dev.marcelo.superflix.R;
 import dev.marcelo.superflix.data.model.Filme;
+import dev.marcelo.superflix.domain.Favorito;
 import dev.marcelo.superflix.ui.listaCategorias.ListaCategoriasAdapter;
 import dev.marcelo.superflix.ui.listaCategorias.ListaCategoriasContrato;
 import dev.marcelo.superflix.ui.listaFilmes.ListaFilmesAdapter;
@@ -24,6 +26,8 @@ public class DetalhesFilmeActivity extends AppCompatActivity {
 
     public static final String EXTRA_FILME = "EXTRA_FILME";
 
+    private Filme filme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +36,24 @@ public class DetalhesFilmeActivity extends AppCompatActivity {
         TextView textTituloFilme = findViewById(R.id.text_titulo_filme);
         ImageView imagePosterFilme = findViewById(R.id.image_poster_filme);
 
-        final Filme filme = (Filme) getIntent().getSerializableExtra(EXTRA_FILME);
+
+        filme = (Filme) getIntent().getSerializableExtra(EXTRA_FILME);
 
         textTituloFilme.setText(filme.getTitulo());
         Picasso.get()
                 .load("https://image.tmdb.org/t/p/w342/" + filme.getCaminhoPoster())
                 .into(imagePosterFilme);
     }
+
+    public void adicionarFavorrito(View view) {
+        new Thread() {
+            @Override
+            public void run() {
+                Favorito favorito = new Favorito(getApplicationContext());
+                favorito.adicionar(filme);
+            }
+        }.start();
+    }
+
+
 }

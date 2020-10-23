@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import dev.marcelo.superflix.R;
 import dev.marcelo.superflix.domain.Login;
-import dev.marcelo.superflix.domain.exception.SenhaIncorretaException;
-import dev.marcelo.superflix.domain.exception.UsuarioNaoEncontradoException;
+import dev.marcelo.superflix.exception.SenhaIncorretaException;
+import dev.marcelo.superflix.exception.UsuarioNaoEncontradoException;
 
 public class TelaLogin extends AppCompatActivity {
 
@@ -39,14 +39,22 @@ public class TelaLogin extends AppCompatActivity {
 
     private void actionLogin() {
 
-        try {
-            Login.entrar(inputUsuario.getText().toString(), inputSenha.getText().toString());
-            montarTelaPrincipal();
-        } catch (UsuarioNaoEncontradoException e) {
+        new Thread() {
+            @Override
+            public void run() {
+                Login login = new Login(getApplicationContext());
 
-        } catch (SenhaIncorretaException e) {
+                try {
+                    login.entrar(inputUsuario.getText().toString(), inputSenha.getText().toString());
+                    montarTelaPrincipal();
+                } catch (UsuarioNaoEncontradoException e) {
 
-        }
+                } catch (SenhaIncorretaException e) {
+
+                }
+            }
+        }.start();
+
     }
 
     private void montarTelaPrincipal() {

@@ -5,7 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
+    android:onClick="onFavoritoClicado"
+    android:orientation="vertical"
     tools:context=".ui.listaFilmes.ListaFilmesActivity">
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onFavoritoClicado"
+        android:text="Favoritos" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_filmes"

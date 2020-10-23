@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBackground"
+    android:onClick="adicionarFavorrito"
+    android:orientation="vertical"
     tools:context=".ui.detalhesFilme.DetalhesFilmeActivity">
 
     //fragment
-    //   android:id="@+id/fragmentFilmeDetalhe"
-    //   android:name="dev.marcelo.superflix.view.FilmeFragment"
-    //   android:layout_width="0dp"
-    //   android:layout_height="0dp"
-    //   app:layout_constraintBottom_toBottomOf="parent"
-    //   app:layout_constraintEnd_toEndOf="parent"
-    //   app:layout_constraintHorizontal_bias="0.0"
-    //   app:layout_constraintStart_toStartOf="parent"
-    //   app:layout_constraintTop_toTopOf="parent"
-    //   app:layout_constraintVertical_bias="0.0" />
+    // android:id="@+id/fragmentFilmeDetalhe"
+    // android:name="dev.marcelo.superflix.view.FilmeFragment"
+    // android:layout_width="0dp"
+    // android:layout_height="0dp"
+    // app:layout_constraintBottom_toBottomOf="parent"
+    // app:layout_constraintEnd_toEndOf="parent"
+    // app:layout_constraintHorizontal_bias="0.0"
+    // app:layout_constraintStart_toStartOf="parent"
+    // app:layout_constraintTop_toTopOf="parent"
+    // app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/image_poster_filme"
@@ -46,5 +47,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.796"
         tools:text="Título do Filme" />
+
+    <Button
+        android:id="@+id/btnFavorito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="adicionarFavorrito"
+        android:text="Adicionar  Favorito"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_titulo_filme" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
