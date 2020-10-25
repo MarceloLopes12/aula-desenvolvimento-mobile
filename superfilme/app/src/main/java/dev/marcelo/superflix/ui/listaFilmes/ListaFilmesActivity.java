@@ -83,10 +83,4 @@ public class ListaFilmesActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-
-    public void onFavoritoClicado(View view) {
-        Intent intent = new Intent( this, ListaFavoritosActivity.class);
-        startActivity(intent);
-    }
-
 }

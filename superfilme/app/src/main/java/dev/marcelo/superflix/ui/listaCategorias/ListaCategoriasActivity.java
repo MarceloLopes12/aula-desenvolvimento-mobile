@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
 import dev.marcelo.superflix.R;
 import dev.marcelo.superflix.data.model.Categoria;
+import dev.marcelo.superflix.ui.listaFavoritos.ListaFavoritosActivity;
 import dev.marcelo.superflix.ui.listaFilmes.ListaFilmesActivity;
 
 public class ListaCategoriasActivity extends AppCompatActivity
@@ -65,4 +67,11 @@ public class ListaCategoriasActivity extends AppCompatActivity
         intent.putExtra(ListaFilmesActivity.EXTRA_CATEGORIA, categoria);
         startActivity(intent);
     }
+
+    public void onFavoritoClicado(View view) {
+        Intent intent = new Intent( this, ListaFavoritosActivity.class);
+        startActivity(intent);
+    }
+
+
 }

@@ -6,6 +6,13 @@
     android:orientation="vertical"
     tools:context=".ui.listaCategorias.ListaCategoriasActivity">
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onFavoritoClicado"
+        android:text="Favoritos" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_categorias"
         android:layout_width="match_parent"
