@@ -5,7 +5,6 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 public class Filme implements Serializable {
@@ -20,9 +19,13 @@ public class Filme implements Serializable {
     @ColumnInfo(name = "caminho_poster")
     private String caminhoPoster;
 
-    public Filme(String titulo, String caminhoPoster) {
+    @ColumnInfo(name = "descricao")
+    private String descricao;
+
+    public Filme(String titulo, String caminhoPoster, String descricao) {
         this.titulo = titulo;
         this.caminhoPoster = caminhoPoster;
+        this.descricao = descricao;
     }
 
     public long getUid() {
@@ -48,6 +51,10 @@ public class Filme implements Serializable {
     public void setCaminhoPoster(String caminhoPoster) {
         this.caminhoPoster = caminhoPoster;
     }
+
+    public String getDescricao() { return descricao; }
+
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
     @Override
     public boolean equals(Object o) {

@@ -35,10 +35,11 @@ public class DetalhesFilmeActivity extends AppCompatActivity {
 
         TextView textTituloFilme = findViewById(R.id.text_titulo_filme);
         ImageView imagePosterFilme = findViewById(R.id.image_poster_filme);
+        TextView textDescricaoFilme = findViewById(R.id.text_descricao_filme);
 
 
         filme = (Filme) getIntent().getSerializableExtra(EXTRA_FILME);
-
+        textDescricaoFilme.setText(filme.getDescricao());
         textTituloFilme.setText(filme.getTitulo());
         Picasso.get()
                 .load("https://image.tmdb.org/t/p/w342/" + filme.getCaminhoPoster())
