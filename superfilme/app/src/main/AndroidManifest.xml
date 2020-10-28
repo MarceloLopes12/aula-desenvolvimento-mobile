@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.marcelo.superflix">
+    package="com.grupo3.superflix">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,17 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.listaFilmes.ListaFilmesActivity"></activity>
-        <activity android:name=".ui.detalhesFilme.DetalhesFilmeActivity"></activity>
-        <activity android:name=".ui.login.TelaLogin">
+        <activity android:name="com.grupo3.superflix.ui.listaFilmes.ListaFilmesActivity"></activity>
+        <activity android:name="com.grupo3.superflix.ui.detalhesFilme.DetalhesFilmeActivity"></activity>
+        <activity android:name="com.grupo3.superflix.ui.listaCategorias.ListaCategoriasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.listaCategorias.ListaCategoriasActivity" />
-        <activity android:name=".ui.listaFavoritos.ListaFavoritosActivity" />
+        <activity android:name="com.grupo3.superflix.ui.listaFavoritos.ListaFavoritosActivity" />
     </application>
 
 </manifest>

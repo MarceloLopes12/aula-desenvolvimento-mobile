@@ -30,8 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:layout_weight="1"
-                    android:background="@mipmap/acao1"
-                    android:src="@mipmap/acao1" />
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,7 +100,7 @@
                 android:paddingTop="20dp">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btn_inicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"

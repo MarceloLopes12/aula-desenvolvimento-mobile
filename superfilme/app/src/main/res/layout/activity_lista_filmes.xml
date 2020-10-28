@@ -8,11 +8,30 @@
     android:orientation="vertical"
     tools:context=".ui.listaFilmes.ListaFilmesActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_filmes"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackground"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_filmes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorBackground"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_menu_lista_filme"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <FrameLayout
+            android:id="@+id/fragment_menu_lista_filme"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
