@@ -7,7 +7,7 @@
     android:background="@color/colorBackground"
     android:onClick="adicionarFavorrito"
     android:orientation="vertical"
-    tools:context=".ui.detalhesFilme.DetalhesFilmeActivity"><![CDATA[
+    tools:context=".ui.detalhesfilme.DetalhesFilmeActivity"><![CDATA[
 
     //fragment
     // android:id="@+id/fragmentFilmeDetalhe"
