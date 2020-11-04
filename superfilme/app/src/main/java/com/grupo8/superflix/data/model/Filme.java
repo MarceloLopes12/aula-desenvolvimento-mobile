@@ -1,8 +1,13 @@
 package com.grupo8.superflix.data.model;
 
+import android.content.Context;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.grupo8.superflix.data.database.AppDataBase;
+import com.grupo8.superflix.data.database.FactoryDataBase;
 
 import java.io.Serializable;
 

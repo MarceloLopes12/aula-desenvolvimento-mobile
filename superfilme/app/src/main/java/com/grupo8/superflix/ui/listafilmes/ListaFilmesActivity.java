@@ -34,10 +34,8 @@ public class ListaFilmesActivity extends AppCompatActivity
 
         configuraAdapter();
 
-            presenter = new ListaFilmesPresenter(categoria, this);
-
+        presenter = new ListaFilmesPresenter(categoria, this);
         presenter.obtemFilmes();
-
     }
 
     private void configuraAdapter() {
