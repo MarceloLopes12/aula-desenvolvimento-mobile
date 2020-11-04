@@ -14,7 +14,7 @@ import com.grupo8.superflix.R;
 import com.grupo8.superflix.data.model.Categoria;
 import com.grupo8.superflix.data.model.Filme;
 import com.grupo8.superflix.ui.detalhesfilme.DetalhesFilmeActivity;
-import com.grupo8.superflix.ui.principal.MenuPrincipal;
+import com.grupo8.superflix.ui.principal.PrincipalActivity;
 
 public class ListaFilmesActivity extends AppCompatActivity
         implements ListaFilmesContrato.ListaFilmesView,
@@ -34,10 +34,7 @@ public class ListaFilmesActivity extends AppCompatActivity
 
         configuraAdapter();
 
-        MenuPrincipal.configurarMenu(getSupportFragmentManager().beginTransaction(),
-                R.id.fragment_menu_lista_filme, R.id.btn_categrias);
-
-        presenter = new ListaFilmesPresenter(categoria, this);
+            presenter = new ListaFilmesPresenter(categoria, this);
 
         presenter.obtemFilmes();
 

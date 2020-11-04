@@ -15,9 +15,9 @@ import com.grupo8.superflix.data.model.Usuario;
 import com.grupo8.superflix.domain.Login;
 import com.grupo8.superflix.exception.SenhaIncorretaException;
 import com.grupo8.superflix.exception.UsuarioNaoEncontradoException;
-import com.grupo8.superflix.ui.categorias.ListaCategoriasActivity;
+import com.grupo8.superflix.ui.principal.PrincipalActivity;
 
-public class TelaLogin extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Button btnLogin;
     private EditText inputUsuario;
@@ -67,7 +67,7 @@ public class TelaLogin extends AppCompatActivity {
     }
 
     private void montarTelaPrincipal() {
-            Intent intent = new Intent(this, ListaCategoriasActivity.class);
+            Intent intent = new Intent(this, PrincipalActivity.class);
             startActivity(intent);
     }
 

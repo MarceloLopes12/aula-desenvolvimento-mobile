@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.grupo8.superflix.R;
-import com.grupo8.superflix.ui.login.TelaLogin;
+import com.grupo8.superflix.ui.login.LoginActivity;
 
 public class TelaSplash extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class TelaSplash extends AppCompatActivity {
     }
 
     private void montarTelaLogin() {
-        Intent intent = new Intent(this, TelaLogin.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

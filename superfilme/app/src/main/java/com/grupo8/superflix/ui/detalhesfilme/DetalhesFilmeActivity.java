@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.grupo8.superflix.ui.principal.MenuPrincipal;
+import com.grupo8.superflix.ui.principal.PrincipalActivity;
 import com.squareup.picasso.Picasso;
 
 import com.grupo8.superflix.R;
@@ -29,8 +29,6 @@ public class DetalhesFilmeActivity extends AppCompatActivity {
         ImageView imagePosterFilme = findViewById(R.id.image_poster_filme);
         TextView textDescricaoFilme = findViewById(R.id.text_descricao_filme);
 
-        MenuPrincipal.configurarMenu(getSupportFragmentManager().beginTransaction(),
-                R.id.fragment_menu_detalhe_filme, R.id.btn_categrias);
 
         filme = (Filme) getIntent().getSerializableExtra(EXTRA_FILME);
         textDescricaoFilme.setText(filme.getDescricao());

@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.grupo8.superflix.data.model.Filme;
 
-public interface ListaFavoritosContrato {
+public interface FavoritosContrato {
 
     interface ListaFavoritosView {
         void mostraFavoritos(List<Filme> favoritos);
