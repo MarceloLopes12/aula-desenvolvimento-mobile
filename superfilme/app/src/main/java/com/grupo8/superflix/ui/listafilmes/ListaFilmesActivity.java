@@ -38,9 +38,7 @@ public class ListaFilmesActivity extends AppCompatActivity
                 R.id.fragment_menu_lista_filme, R.id.btn_categrias);
 
         presenter = new ListaFilmesPresenter(categoria, this);
-
         presenter.obtemFilmes();
-
     }
 
     private void configuraAdapter() {
