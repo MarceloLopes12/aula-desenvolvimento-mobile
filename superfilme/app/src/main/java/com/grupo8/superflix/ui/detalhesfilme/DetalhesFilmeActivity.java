@@ -13,7 +13,6 @@ import com.grupo8.superflix.data.model.Categoria;
 import com.grupo8.superflix.ui.categorias.ListaCategoriasContrato;
 import com.grupo8.superflix.ui.categorias.ListaCategoriasPresenter;
 import com.grupo8.superflix.ui.listafilmes.ListaFilmesContrato;
-import com.grupo8.superflix.ui.principal.MenuPrincipal;
 import com.squareup.picasso.Picasso;
 
 import com.grupo8.superflix.R;
@@ -28,28 +27,20 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     private Filme filme;
 
     private DetalhesFilmeContrato.DetalhesFilmePresenter presenter;
-    private  View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
 
-        final Filme filme = (Filme) getIntent().getSerializableExtra(EXTRA_FILME);
-
+        filme = (Filme) getIntent().getSerializableExtra(EXTRA_FILME);
 
         presenter = new DetalhesFilmePresenter(filme, this);
         presenter.obtemFilme();
     }
 
     public void adicionarFavorrito(View view) {
-        new Thread() {
-            @Override
-            public void run() {
-                Favorito favorito = new Favorito(getApplicationContext());
-                favorito.adicionar(filme);
-            }
-        }.start();
+        presenter.adicionarFilmeFavoritos(filme, this);
     }
 
 
