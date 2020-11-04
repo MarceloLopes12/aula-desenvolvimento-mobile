@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.grupo8.superflix.data.model.Categoria;
 import com.grupo8.superflix.ui.categorias.ListaCategoriasContrato;
 import com.grupo8.superflix.ui.categorias.ListaCategoriasPresenter;
@@ -36,8 +37,6 @@ public class DetalhesFilmeActivity extends AppCompatActivity
 
         final Filme filme = (Filme) getIntent().getSerializableExtra(EXTRA_FILME);
 
-        MenuPrincipal.configurarMenu(getSupportFragmentManager().beginTransaction(),
-                R.id.fragment_menu_detalhe_filme, R.id.btn_categrias);
 
         presenter = new DetalhesFilmePresenter(filme, this);
         presenter.obtemFilme();

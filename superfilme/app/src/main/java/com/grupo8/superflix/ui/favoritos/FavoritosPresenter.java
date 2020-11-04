@@ -5,12 +5,12 @@ import android.content.Context;
 import com.grupo8.superflix.data.model.Usuario;
 import com.grupo8.superflix.domain.Favorito;
 
-public class ListaFavoritosPresenter implements ListaFavoritosContrato.ListaFavoritosPresenter {
+public class FavoritosPresenter implements FavoritosContrato.ListaFavoritosPresenter {
 
-    private ListaFavoritosContrato.ListaFavoritosView view;
+    private FavoritosContrato.ListaFavoritosView view;
     private Usuario usuario;
 
-    public ListaFavoritosPresenter(Usuario usuario, ListaFavoritosContrato.ListaFavoritosView view) {
+    public FavoritosPresenter(Usuario usuario, FavoritosContrato.ListaFavoritosView view) {
         this.usuario = usuario;
         this.view = view;
     }
