@@ -75,7 +75,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     public void onClickShareFilme(View view) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "http://superflix.edu.br?id="+filme.getId());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "http://uniritterfilmes.edu.br?id="+filme.getId());
         sendIntent.setType("text/plain");
 
         if(sendIntent.resolveActivity(getPackageManager()) != null) {
