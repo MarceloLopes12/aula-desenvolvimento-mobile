@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "354655298330",
+    "firebase_url": "https://uniritter-superfilmes.firebaseio.com",
+    "project_id": "uniritter-superfilmes",
+    "storage_bucket": "uniritter-superfilmes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354655298330:android:ce7f50b6899b840e69c2a3",
+        "android_client_info": {
+          "package_name": "dev.marcelo.superflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354655298330-d1i6bubtjrgofhna3r4ql1p8hb0lqo8d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.marcelo.superflix",
+            "certificate_hash": "56d5a405117a3d570d85d4aca08be24ae5cd8823"
+          }
+        },
+        {
+          "client_id": "354655298330-v9rbteoj98nkfeueigdc44s1llujdqmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe8K8H-PbTATVvxmVPLi9f6Y9sYjU9_F4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354655298330-v9rbteoj98nkfeueigdc44s1llujdqmv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
