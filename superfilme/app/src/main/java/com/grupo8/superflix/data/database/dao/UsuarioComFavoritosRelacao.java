@@ -15,7 +15,7 @@ public class UsuarioComFavoritosRelacao {
 
     @Relation(
             parentColumn = "id_usuario",
-            entityColumn = "id_filme",
+            entityColumn = "id",
             associateBy = @Junction(UsuarioFavoritos.class)
     )
     public List<Filme> favoritos;

@@ -13,10 +13,14 @@ public class FilmeResponse {
     @Json(name = "overview")
     private final String descricao;
 
-    public FilmeResponse(String caminhoPoster, String tituloFilme, String descricao) {
+    @Json(name = "id")
+    private final long id;
+
+    public FilmeResponse(String caminhoPoster, String tituloFilme, String descricao, long id) {
         this.caminhoPoster = caminhoPoster;
         this.tituloFilme = tituloFilme;
         this.descricao = descricao;
+        this.id = id;
     }
 
     public final String getCaminhoPoster() {
@@ -28,4 +32,7 @@ public class FilmeResponse {
     }
 
     public final String getDescricao(){ return descricao; }
+
+    public final long getId(){ return id; }
+
 }

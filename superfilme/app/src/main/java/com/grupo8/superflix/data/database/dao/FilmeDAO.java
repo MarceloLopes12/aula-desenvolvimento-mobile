@@ -14,7 +14,7 @@ import com.grupo8.superflix.data.model.Filme;
 @Dao
 public interface FilmeDAO {
 
-    @Query("SELECT * FROM filme where id_filme = (:idFilme)")
+    @Query("SELECT * FROM filme where id = (:idFilme)")
     Filme buscarPorId(long idFilme);
 
     @Query("SELECT * FROM filme where titulo = (:titulo)")

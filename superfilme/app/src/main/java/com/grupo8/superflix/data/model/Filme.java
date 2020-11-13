@@ -1,22 +1,17 @@
 package com.grupo8.superflix.data.model;
 
-import android.content.Context;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import com.grupo8.superflix.data.database.AppDataBase;
-import com.grupo8.superflix.data.database.FactoryDataBase;
 
 import java.io.Serializable;
 
 @Entity
 public class Filme implements Serializable {
 
-    @ColumnInfo(name = "id_filme")
+    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
-    private long uid;
+    private long id;
 
     @ColumnInfo(name = "titulo")
     private String titulo;
@@ -27,18 +22,11 @@ public class Filme implements Serializable {
     @ColumnInfo(name = "descricao")
     private String descricao;
 
-    public Filme(String titulo, String caminhoPoster, String descricao) {
+    public Filme(long id, String titulo, String caminhoPoster, String descricao) {
         this.titulo = titulo;
         this.caminhoPoster = caminhoPoster;
         this.descricao = descricao;
-    }
-
-    public long getUid() {
-        return uid;
-    }
-
-    public void setUid(long uid) {
-        this.uid = uid;
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -61,6 +49,8 @@ public class Filme implements Serializable {
 
     public void setDescricao(String descricao) { this.descricao = descricao; }
 
+    public long getId() { return id; }
+
     @Override
     public boolean equals(Object o) {
         Filme f = (Filme) o;
@@ -70,6 +60,6 @@ public class Filme implements Serializable {
 
     @Override
     public int hashCode() {
-        return (int) uid;
+        return (int) id;
     }
 }

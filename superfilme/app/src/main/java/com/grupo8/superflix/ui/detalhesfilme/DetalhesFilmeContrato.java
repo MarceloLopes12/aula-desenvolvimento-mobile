@@ -10,6 +10,8 @@ public interface DetalhesFilmeContrato {
 
     interface DetalhesFilmeView {
         void mostraFilme(Filme filme);
+
+        void mostraErro();
     }
 
     interface DetalhesFilmePresenter {

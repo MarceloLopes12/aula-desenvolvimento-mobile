@@ -11,9 +11,14 @@ public class FilmeMapper {
         List<Filme> listaFilmes = new ArrayList<>();
 
         for(FilmeResponse filmeResponse : listaFilmeResponse) {
-            final Filme filme = new Filme(filmeResponse.getTituloFilme(), filmeResponse.getCaminhoPoster(), filmeResponse.getDescricao());
+            final Filme filme = new Filme(filmeResponse.getId(), filmeResponse.getTituloFilme(), filmeResponse.getCaminhoPoster(), filmeResponse.getDescricao());
             listaFilmes.add(filme);
         }
         return listaFilmes;
+    }
+
+    public static Filme deResponseParaDominio(FilmeResponse filmeResponse) {
+            final Filme filme = new Filme(filmeResponse.getId(), filmeResponse.getTituloFilme(), filmeResponse.getCaminhoPoster(), filmeResponse.getDescricao());
+            return filme;
     }
 }

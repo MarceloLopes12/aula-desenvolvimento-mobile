@@ -1,24 +1,50 @@
 package com.grupo8.superflix.ui.detalhesfilme;
 
 import android.content.Context;
+import android.content.Intent;
 
+import com.grupo8.superflix.data.mapper.FilmeMapper;
 import com.grupo8.superflix.data.model.Filme;
-import com.grupo8.superflix.data.model.Usuario;
+import com.grupo8.superflix.data.network.ApiService;
+import com.grupo8.superflix.data.network.response.filme.FilmeResponse;
+import com.grupo8.superflix.data.network.response.filme.FilmesResult;
 import com.grupo8.superflix.domain.Favorito;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetalhesFilmePresenter implements DetalhesFilmeContrato.DetalhesFilmePresenter {
 
     private DetalhesFilmeContrato.DetalhesFilmeView view;
-    private Filme filme;
+    private long idFilme;
 
-    public DetalhesFilmePresenter(Filme filme, DetalhesFilmeContrato.DetalhesFilmeView view) {
-        this.filme = filme;
+    public  DetalhesFilmePresenter(Long idFilme, DetalhesFilmeContrato.DetalhesFilmeView view) {
+        this.idFilme = idFilme;
         this.view = view;
     }
 
     @Override
     public void obtemFilme() {
-        view.mostraFilme(new Filme(filme.getTitulo(), filme.getCaminhoPoster(), filme.getDescricao()));
+        ApiService.getFilmeInstance()
+                .obterFilme(idFilme, "dd56ac784462a1c32ad07a07c2a9c494", "pt-BR")
+                .enqueue(new Callback<FilmeResponse>() {
+                    @Override
+                    public void onResponse(Call<FilmeResponse> call, Response<FilmeResponse> response) {
+                        final Filme filmes = FilmeMapper
+                                .deResponseParaDominio(response.body());
+
+                        view.mostraFilme(filmes);
+                    }
+
+                    @Override
+                    public void onFailure(Call<FilmeResponse> call, Throwable t) {
+                        view.mostraErro();
+                    }
+                });
+
     }
 
     @Override

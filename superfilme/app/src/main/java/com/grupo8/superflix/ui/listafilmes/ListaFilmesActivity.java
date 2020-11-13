@@ -70,7 +70,7 @@ public class ListaFilmesActivity extends AppCompatActivity
     @Override
     public void onItemFilmeClicado(Filme filme) {
         Intent intent = new Intent( this, DetalhesFilmeActivity.class);
-        intent.putExtra(DetalhesFilmeActivity.EXTRA_FILME, filme);
+        intent.putExtra(DetalhesFilmeActivity.EXTRA_FILME, filme.getId());
         startActivity(intent);
     }
 

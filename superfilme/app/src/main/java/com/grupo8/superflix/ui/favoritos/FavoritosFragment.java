@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.grupo8.superflix.R;
 import com.grupo8.superflix.data.model.Filme;
 import com.grupo8.superflix.ui.detalhesfilme.DetalhesFilmeActivity;
@@ -28,6 +30,7 @@ public class FavoritosFragment extends Fragment
     private Usuario usuario;
     private ListaFilmesAdapter filmesAdapter;
     private FavoritosContrato.ListaFavoritosPresenter presenter;
+    private FirebaseAuth mAuth;
 
     public static final String EXTRA_USUARIO = "EXTRA_USUARIO";
 
@@ -43,7 +46,7 @@ public class FavoritosFragment extends Fragment
 
     @Override
     public void onStart() {
-        usuario = (Usuario) getActivity().getIntent().getSerializableExtra(EXTRA_USUARIO);
+        usuario = new Usuario("ADM","1234");//(Usuario) getActivity().getIntent().getSerializableExtra(EXTRA_USUARIO);
 
         configuraAdapter();
 
@@ -90,7 +93,7 @@ public class FavoritosFragment extends Fragment
     public void onItemFilmeClicado(Filme filme) {
         Intent intent =
                 new Intent( getActivity().getApplicationContext(), DetalhesFilmeActivity.class);
-        intent.putExtra(DetalhesFilmeActivity.EXTRA_FILME, filme);
+        intent.putExtra(DetalhesFilmeActivity.EXTRA_FILME, filme.getId());
         startActivity(intent);
     }
 }

@@ -11,10 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.grupo8.superflix.ui.listafilmes.ListaFilmesActivity"></activity>
-        <activity android:name="com.grupo8.superflix.ui.detalhesfilme.DetalhesFilmeActivity"></activity>
-        <activity android:name="com.grupo8.superflix.ui.principal.PrincipalActivity"></activity>
-        <activity android:name="com.grupo8.superflix.ui.login.LoginActivity">
+        <activity android:name=".ui.listafilmes.ListaFilmesActivity" />
+        <activity android:name=".ui.detalhesfilme.DetalhesFilmeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/json"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="superflix.edu.br" android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.principal.PrincipalActivity" />
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
