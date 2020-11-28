@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/lView"
     android:background="@color/colorBackground">
 
     <LinearLayout
@@ -73,5 +74,6 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

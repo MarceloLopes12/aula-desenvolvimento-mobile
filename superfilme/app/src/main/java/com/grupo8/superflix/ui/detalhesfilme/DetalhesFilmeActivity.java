@@ -3,6 +3,10 @@ package com.grupo8.superflix.ui.detalhesfilme;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +36,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
 
     private long idFilme;
     private Filme filme;
+    private View dView;
 
     private DetalhesFilmeContrato.DetalhesFilmePresenter presenter;
 
@@ -39,6 +44,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
+        dView = findViewById(R.id.dView);
 
 
         Intent intent = getIntent();
@@ -62,6 +68,16 @@ public class DetalhesFilmeActivity extends AppCompatActivity
             } else {
                 idFilme = (long) getIntent().getSerializableExtra(EXTRA_FILME);
             }
+        }
+
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+        Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mySensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
         }
 
         presenter = new DetalhesFilmePresenter(idFilme, this);
@@ -104,4 +120,23 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     public void mostraErro() {
         Toast.makeText(this, "Erro ao obter lista de filmes", Toast.LENGTH_LONG).show();
     }
+    private final SensorEventListener lightSensorListener
+            = new SensorEventListener(){
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                if(event.values[0] >= 10000) {
+                    dView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                }else if(event.values[0] <= 10000){
+                    dView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                }
+            }
+        }
+    };
+
 }

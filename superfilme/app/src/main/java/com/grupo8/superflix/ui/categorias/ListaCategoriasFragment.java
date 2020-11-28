@@ -8,8 +8,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +29,8 @@ import com.grupo8.superflix.data.model.Categoria;
 import com.grupo8.superflix.ui.favoritos.FavoritosFragment;
 import com.grupo8.superflix.ui.listafilmes.ListaFilmesActivity;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class ListaCategoriasFragment extends Fragment
         implements ListaCategoriasContrato.ListaCategoriasView,
         ListaCategoriasAdapter.ItemCategoriaClickListener {
@@ -31,6 +38,7 @@ public class ListaCategoriasFragment extends Fragment
     private ListaCategoriasAdapter categoriasAdapter;
     private ListaCategoriasContrato.ListaCategoriasPresenter presenter;
     private RecyclerView recyclerCategorias;
+    private SensorManager mSensorManager;
 
 
 
@@ -46,6 +54,15 @@ public class ListaCategoriasFragment extends Fragment
 
         presenter = new ListaCategoriasPresenter(this);
         presenter.obtemCategorias();
+
+        mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        Sensor lightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mSensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
 
         return view;
     }
@@ -87,4 +104,22 @@ public class ListaCategoriasFragment extends Fragment
         startActivity(intent);
     }
 
+    private final SensorEventListener lightSensorListener
+            = new SensorEventListener(){
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                if(event.values[0] >= 10000) {
+                    recyclerCategorias.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                }else if(event.values[0] <= 10000){
+                    recyclerCategorias.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                }
+            }
+        }
+    };
 }
