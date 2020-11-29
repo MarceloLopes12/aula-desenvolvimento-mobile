@@ -116,7 +116,7 @@ public class ListaCategoriasFragment extends Fragment
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
                 if(event.values[0] >= 10000) {
                     recyclerCategorias.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
-                }else if(event.values[0] <= 10000){
+                }else{
                     recyclerCategorias.setBackgroundColor(getResources().getColor(R.color.colorBackground));
                 }
             }

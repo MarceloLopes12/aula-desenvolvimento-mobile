@@ -104,7 +104,7 @@ public class ListaFilmesActivity extends AppCompatActivity
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
                 if(event.values[0] >= 10000) {
                     recycler_filmes.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
-                }else if(event.values[0] <= 10000){
+                }else{
                     recycler_filmes.setBackgroundColor(getResources().getColor(R.color.colorBackground));
                 }
             }

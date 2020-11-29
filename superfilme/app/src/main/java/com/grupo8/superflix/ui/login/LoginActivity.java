@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                     lView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
                     inputUsuario.setBackground(getDrawable(R.drawable.borda2));
                     inputSenha.setBackground(getDrawable(R.drawable.borda2));
-                }else if(event.values[0] <= 10000){
+                }else{
                     lView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
                     inputUsuario.setBackground(getDrawable(R.drawable.borda1));
                     inputSenha.setBackground(getDrawable(R.drawable.borda1));

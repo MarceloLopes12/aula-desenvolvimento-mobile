@@ -128,7 +128,7 @@ public class FavoritosFragment extends Fragment
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
                 if(event.values[0] >= 10000) {
                     fView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
-                }else if(event.values[0] <= 10000){
+                }else{
                     fView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
                 }
             }
