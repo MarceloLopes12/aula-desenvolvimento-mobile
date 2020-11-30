@@ -16,6 +16,9 @@ public interface DetalhesFilmeContrato {
 
     interface DetalhesFilmePresenter {
         void obtemFilme();
+
+        void removerFilmeFavoritos(Filme filme, Context context);
+
         void adicionarFilmeFavoritos(Filme filme, Context context);
     }
 }

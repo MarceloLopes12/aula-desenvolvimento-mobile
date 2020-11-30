@@ -48,6 +48,17 @@ public class DetalhesFilmePresenter implements DetalhesFilmeContrato.DetalhesFil
     }
 
     @Override
+    public void removerFilmeFavoritos(final Filme filme, final Context context) {
+        new Thread() {
+            @Override
+            public void run() {
+                Favorito favorito = new Favorito(context);
+                favorito.remover(filme);
+            }
+        }.start();
+}
+
+    @Override
     public void adicionarFilmeFavoritos(final Filme filme, final Context context) {
         new Thread() {
             @Override
@@ -57,4 +68,5 @@ public class DetalhesFilmePresenter implements DetalhesFilmeContrato.DetalhesFil
             }
         }.start();
     }
+
 }

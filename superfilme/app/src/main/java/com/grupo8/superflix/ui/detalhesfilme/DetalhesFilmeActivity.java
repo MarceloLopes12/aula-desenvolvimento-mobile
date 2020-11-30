@@ -104,4 +104,9 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     public void mostraErro() {
         Toast.makeText(this, "Erro ao obter lista de filmes", Toast.LENGTH_LONG).show();
     }
+    public void removerFavoritos(View view)
+    {
+        presenter.removerFilmeFavoritos(filme, this);
+    }
+
 }
