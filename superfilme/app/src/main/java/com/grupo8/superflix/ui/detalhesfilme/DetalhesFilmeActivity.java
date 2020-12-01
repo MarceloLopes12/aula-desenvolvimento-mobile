@@ -152,7 +152,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
         @Override
         public void onSensorChanged(SensorEvent event) {
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
-                if(event.values[0] >= 10000) {
+                if(event.values[0] >= 1000) {
                     dView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
                 }else{
                     dView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
