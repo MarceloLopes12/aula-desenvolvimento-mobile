@@ -88,11 +88,12 @@
         android:id="@+id/btnFavorito2"
         android:layout_width="168dp"
         android:layout_height="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="12dp"
         android:onClick="removerFavoritos"
         android:text="Remover Favorito"
+        app:layout_constraintBottom_toTopOf="@+id/btnCompartilhar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_descricao_filme" />
+        app:layout_constraintTop_toBottomOf="@+id/btnFavorito" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
