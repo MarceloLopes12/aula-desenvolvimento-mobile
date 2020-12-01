@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
-                if(event.values[0] >= 1000) {
+                if(event.values[0] >= 50) {
                     lView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
                     inputUsuario.setBackground(getDrawable(R.drawable.borda2));
                     inputSenha.setBackground(getDrawable(R.drawable.borda2));
