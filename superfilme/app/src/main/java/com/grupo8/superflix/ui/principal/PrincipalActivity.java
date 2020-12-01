@@ -96,7 +96,7 @@ public class PrincipalActivity extends FragmentActivity implements BottomNavigat
         @Override
         public void onSensorChanged(SensorEvent event) {
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
-                if(event.values[0] >= 10000) {
+                if(event.values[0] >= 1000) {
                     pView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
                 }else{
                     pView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
