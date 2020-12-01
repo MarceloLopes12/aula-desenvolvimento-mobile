@@ -1,13 +1,19 @@
 package com.grupo8.superflix.ui.principal;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,16 +25,29 @@ public class PrincipalActivity extends FragmentActivity implements BottomNavigat
         .OnNavigationItemSelectedListener {
 
     private BottomNavigationView bottomNavigationView;
+    private View pView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        pView = findViewById(R.id.menu_principal);
+
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
         bottomNavigationView = findViewById(R.id.menu_principal);
         setFrame(new ListaCategoriasFragment());
         setBotaoSelecionado(R.id.btn_categrias);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
+        Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mySensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
 
@@ -66,6 +85,25 @@ public class PrincipalActivity extends FragmentActivity implements BottomNavigat
 
         return true;
     }
+
+    private final SensorEventListener lightSensorListener
+            = new SensorEventListener(){
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                if(event.values[0] >= 10000) {
+                    pView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                }else{
+                    pView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                }
+            }
+        }
+    };
 
 
 }

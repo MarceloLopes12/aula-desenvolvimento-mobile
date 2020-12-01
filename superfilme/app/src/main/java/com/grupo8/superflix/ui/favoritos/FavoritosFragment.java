@@ -1,6 +1,11 @@
 package com.grupo8.superflix.ui.favoritos;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +36,8 @@ public class FavoritosFragment extends Fragment
     private ListaFilmesAdapter filmesAdapter;
     private FavoritosContrato.ListaFavoritosPresenter presenter;
     private FirebaseAuth mAuth;
+    private View fView;
+    private SensorManager mSensorManager;
 
     public static final String EXTRA_USUARIO = "EXTRA_USUARIO";
 
@@ -40,6 +47,18 @@ public class FavoritosFragment extends Fragment
 
         View view = inflater
                 .inflate(R.layout.tela_favoritos, container, false);
+
+        fView = view.findViewById(R.id.fView);
+
+        mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        Sensor lightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mSensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+
 
         return view;
     }
@@ -96,4 +115,23 @@ public class FavoritosFragment extends Fragment
         intent.putExtra(DetalhesFilmeActivity.EXTRA_FILME, filme.getId());
         startActivity(intent);
     }
+
+    private final SensorEventListener lightSensorListener
+            = new SensorEventListener(){
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                if(event.values[0] >= 10000) {
+                    fView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                }else{
+                    fView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                }
+            }
+        }
+    };
 }

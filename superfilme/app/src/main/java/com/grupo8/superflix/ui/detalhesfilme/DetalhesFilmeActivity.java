@@ -1,10 +1,22 @@
 package com.grupo8.superflix.ui.detalhesfilme;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,6 +37,8 @@ import com.grupo8.superflix.domain.Favorito;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+
 public class DetalhesFilmeActivity extends AppCompatActivity
                 implements DetalhesFilmeContrato.DetalhesFilmeView {
 
@@ -32,6 +46,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
 
     private long idFilme;
     private Filme filme;
+    private View dView;
 
     private DetalhesFilmeContrato.DetalhesFilmePresenter presenter;
 
@@ -39,7 +54,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_filme);
-
+        dView = findViewById(R.id.dView);
 
         Intent intent = getIntent();
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
@@ -47,7 +62,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
             String id = uri.getQueryParameter("id");
             idFilme = Long.parseLong(id);
         } else {
-            if ("application/json".equals(intent.getType())) {
+             if ("application/json".equals(intent.getType())) {
                 try {
                     Log.d("intent", intent.getExtras().toString());
                     for (String k : intent.getExtras().keySet()) {
@@ -64,6 +79,16 @@ public class DetalhesFilmeActivity extends AppCompatActivity
             }
         }
 
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+        Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mySensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+
         presenter = new DetalhesFilmePresenter(idFilme, this);
         presenter.obtemFilme();
     }
@@ -73,13 +98,26 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     }
 
     public void onClickShareFilme(View view) {
+        ImageView imagePosterFilme = findViewById(R.id.image_poster_filme);
+        Drawable drawable = imagePosterFilme.getDrawable();
+        Bitmap b = ((BitmapDrawable)drawable).getBitmap();
+
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
+
+        sendIntent.setType("*/*");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
+        b.compress(Bitmap.CompressFormat.JPEG,100,bytes);
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), b,"Titulo da Imagem", null);
+        Uri imageUri = Uri.parse(path);
+
+        sendIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+
         sendIntent.putExtra(Intent.EXTRA_TEXT, "http://uniritterfilmes.edu.br?id="+filme.getId());
-        sendIntent.setType("text/plain");
 
         if(sendIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(sendIntent);
+            startActivity(Intent.createChooser(sendIntent, "Share Image"));
         } else {
             Toast.makeText(getApplicationContext(), "falhou", Toast.LENGTH_SHORT).show();
         }
@@ -104,9 +142,29 @@ public class DetalhesFilmeActivity extends AppCompatActivity
     public void mostraErro() {
         Toast.makeText(this, "Erro ao obter lista de filmes", Toast.LENGTH_LONG).show();
     }
+
     public void removerFavoritos(View view)
     {
         presenter.removerFilmeFavoritos(filme, this);
     }
+
+    private final SensorEventListener lightSensorListener
+            = new SensorEventListener(){
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                if(event.values[0] >= 1000) {
+                    dView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                }else{
+                    dView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                }
+            }
+        }
+    };
 
 }

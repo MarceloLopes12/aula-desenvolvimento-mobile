@@ -5,7 +5,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -22,6 +27,7 @@ public class ListaFilmesActivity extends AppCompatActivity
 
     private ListaFilmesAdapter filmesAdapter;
     private ListaFilmesContrato.ListaFilmesPresenter presenter;
+    private View recycler_filmes;
 
     public static final String EXTRA_CATEGORIA = "EXTRA_CATEGORIA";
 
@@ -30,9 +36,21 @@ public class ListaFilmesActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_filmes);
 
+        recycler_filmes = findViewById(R.id.recycler_filmes);
+
         final Categoria categoria = (Categoria) getIntent().getSerializableExtra(EXTRA_CATEGORIA);
 
         configuraAdapter();
+
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+        Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mySensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
 
         presenter = new ListaFilmesPresenter(categoria, this);
         presenter.obtemFilmes();
@@ -73,5 +91,24 @@ public class ListaFilmesActivity extends AppCompatActivity
         intent.putExtra(DetalhesFilmeActivity.EXTRA_FILME, filme.getId());
         startActivity(intent);
     }
+
+    private final SensorEventListener lightSensorListener
+            = new SensorEventListener(){
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                if(event.values[0] >= 10000) {
+                    recycler_filmes.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                }else{
+                    recycler_filmes.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                }
+            }
+        }
+    };
 
 }

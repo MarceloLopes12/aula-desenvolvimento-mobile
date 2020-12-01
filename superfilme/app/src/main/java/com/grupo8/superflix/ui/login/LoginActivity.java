@@ -3,6 +3,7 @@ package com.grupo8.superflix.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputUsuario;
     private EditText inputSenha;
     private FirebaseAuth mAuth;
-
+    private View lView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.tela_login);
         //FirebaseAuth.getInstance().signOut();
         mAuth = FirebaseAuth.getInstance();
+        lView = findViewById(R.id.lView);
+
 
         btnLogin = (Button) findViewById(R.id.btnSingup);
         inputUsuario = (EditText) findViewById(R.id.email);
@@ -50,9 +59,19 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(inputUsuario.getText().toString(), inputSenha.getText().toString());
             }
         });
+
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+        Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mySensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
-    private void loginUser(String email, String password) {
+        private void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -112,4 +131,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         }.start();
     }
+
+    private final SensorEventListener lightSensorListener
+            = new SensorEventListener(){
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+         }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                if(event.values[0] >= 10000) {
+                    lView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                    inputUsuario.setBackground(getDrawable(R.drawable.borda2));
+                    inputSenha.setBackground(getDrawable(R.drawable.borda2));
+                }else{
+                    lView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                    inputUsuario.setBackground(getDrawable(R.drawable.borda1));
+                    inputSenha.setBackground(getDrawable(R.drawable.borda1));
+                }
+            }
+        }
+    };
 }
