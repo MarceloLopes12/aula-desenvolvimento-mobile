@@ -79,6 +79,21 @@ public class DetalhesFilmeActivity extends AppCompatActivity
             }
         }
 
+
+
+        presenter = new DetalhesFilmePresenter(idFilme, this);
+        presenter.obtemFilme();
+    }
+
+    @Override
+    protected void onPause() {
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mySensorManager.unregisterListener(lightSensorListener);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
         SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
 
         Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -88,9 +103,7 @@ public class DetalhesFilmeActivity extends AppCompatActivity
                     lightSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
-
-        presenter = new DetalhesFilmePresenter(idFilme, this);
-        presenter.obtemFilme();
+        super.onResume();
     }
 
     public void adicionarFavorrito(View view) {
