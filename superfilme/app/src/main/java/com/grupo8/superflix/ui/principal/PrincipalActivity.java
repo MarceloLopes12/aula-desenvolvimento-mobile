@@ -41,6 +41,19 @@ public class PrincipalActivity extends FragmentActivity implements BottomNavigat
         setBotaoSelecionado(R.id.btn_categrias);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
+    }
+
+    @Override
+    protected void onPause() {
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mySensorManager.unregisterListener(lightSensorListener);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
         Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         if(lightSensor != null) {
             mySensorManager.registerListener(
@@ -48,6 +61,7 @@ public class PrincipalActivity extends FragmentActivity implements BottomNavigat
                     lightSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
+        super.onResume();
     }
 
 

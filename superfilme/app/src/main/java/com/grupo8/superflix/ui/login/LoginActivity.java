@@ -60,15 +60,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-
-        Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        if(lightSensor != null) {
-            mySensorManager.registerListener(
-                    lightSensorListener,
-                    lightSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL);
-        }
     }
 
         private void loginUser(String email, String password) {
@@ -90,6 +81,27 @@ public class LoginActivity extends AppCompatActivity {
                         }
                 }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mySensorManager.unregisterListener(lightSensorListener);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+        Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        if(lightSensor != null) {
+            mySensorManager.registerListener(
+                    lightSensorListener,
+                    lightSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        super.onResume();
     }
 
     private boolean userConnected(){

@@ -42,6 +42,19 @@ public class ListaFilmesActivity extends AppCompatActivity
 
         configuraAdapter();
 
+        presenter = new ListaFilmesPresenter(categoria, this);
+        presenter.obtemFilmes();
+    }
+
+    @Override
+    protected void onPause() {
+        SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mySensorManager.unregisterListener(lightSensorListener);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
         SensorManager mySensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
 
         Sensor lightSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -51,9 +64,7 @@ public class ListaFilmesActivity extends AppCompatActivity
                     lightSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
-
-        presenter = new ListaFilmesPresenter(categoria, this);
-        presenter.obtemFilmes();
+        super.onResume();
     }
 
     private void configuraAdapter() {
@@ -102,7 +113,7 @@ public class ListaFilmesActivity extends AppCompatActivity
         @Override
         public void onSensorChanged(SensorEvent event) {
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
-                if(event.values[0] >= 1000) {
+                if(event.values[0] >= 50) {
                     recycler_filmes.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
                 }else{
                     recycler_filmes.setBackgroundColor(getResources().getColor(R.color.colorBackground));
