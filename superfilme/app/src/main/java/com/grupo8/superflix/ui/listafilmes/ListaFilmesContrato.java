@@ -14,5 +14,7 @@ public interface ListaFilmesContrato {
 
     interface ListaFilmesPresenter extends DestruirPresenter {
         void obtemFilmes();
+
+        void pesquisaFilmes(String titulo);
     }
 }

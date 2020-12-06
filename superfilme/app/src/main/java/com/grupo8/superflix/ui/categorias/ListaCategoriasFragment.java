@@ -19,6 +19,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -28,6 +31,7 @@ import com.grupo8.superflix.R;
 import com.grupo8.superflix.data.model.Categoria;
 import com.grupo8.superflix.ui.favoritos.FavoritosFragment;
 import com.grupo8.superflix.ui.listafilmes.ListaFilmesActivity;
+import com.grupo8.superflix.ui.listafilmes.ListaFilmesContrato;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -37,8 +41,12 @@ public class ListaCategoriasFragment extends Fragment
 
     private ListaCategoriasAdapter categoriasAdapter;
     private ListaCategoriasContrato.ListaCategoriasPresenter presenter;
+    private ListaFilmesContrato.ListaFilmesPresenter presenterFilmes;
     private RecyclerView recyclerCategorias;
     private SensorManager mSensorManager;
+    private Button btnSearch;
+    private EditText inputTitle;
+    private View CView;
 
 
 
@@ -49,6 +57,17 @@ public class ListaCategoriasFragment extends Fragment
         View view = inflater
                 .inflate(R.layout.activity_lista_categorias, container, false);
 
+        btnSearch = (Button) view.findViewById(R.id.btnSearch);
+        inputTitle = (EditText) view.findViewById(R.id.search);
+
+        btnSearch.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                onSearchTitle(inputTitle.getText().toString());
+            }
+        });
+
+        CView = view.findViewById(R.id.CView);
         recyclerCategorias = view.findViewById(R.id.recycler_categorias);
         configuraAdapter();
 
@@ -104,6 +123,12 @@ public class ListaCategoriasFragment extends Fragment
         startActivity(intent);
     }
 
+    public void onSearchTitle(String titulo) {
+        Intent intent = new Intent(getActivity().getApplicationContext(), ListaFilmesActivity.class);
+        intent.putExtra(ListaFilmesActivity.EXTRA_TITULO, titulo);
+        startActivity(intent);
+    }
+
     private final SensorEventListener lightSensorListener
             = new SensorEventListener(){
 
@@ -115,8 +140,12 @@ public class ListaCategoriasFragment extends Fragment
         public void onSensorChanged(SensorEvent event) {
             if(event.sensor.getType() == Sensor.TYPE_LIGHT) {
                 if(event.values[0] >= 50) {
+                    CView.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
                     recyclerCategorias.setBackgroundColor(getResources().getColor(R.color.colorWhiteBackground));
+                    inputTitle.setBackground(getResources().getDrawable(R.drawable.borda2));
                 }else{
+                    CView.setBackgroundColor(getResources().getColor(R.color.colorBackground));
+                    inputTitle.setBackground(getResources().getDrawable(R.drawable.borda1));
                     recyclerCategorias.setBackgroundColor(getResources().getColor(R.color.colorBackground));
                 }
             }

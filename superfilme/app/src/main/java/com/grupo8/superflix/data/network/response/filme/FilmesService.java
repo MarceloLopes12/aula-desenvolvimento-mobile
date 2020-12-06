@@ -18,4 +18,10 @@ public interface FilmesService {
             @Path("Id") long id,
             @Query("api_key") String chaveApi,
             @Query("language") String language);
+
+    @GET("search/movie")
+    Call<FilmesResult> listarFilmesPorTitulo(
+            @Query("api_key") String chaveApi,
+            @Query("language") String language,
+            @Query("query") String titulo);
 }

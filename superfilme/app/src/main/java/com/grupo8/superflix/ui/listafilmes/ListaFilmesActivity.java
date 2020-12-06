@@ -30,6 +30,7 @@ public class ListaFilmesActivity extends AppCompatActivity
     private View recycler_filmes;
 
     public static final String EXTRA_CATEGORIA = "EXTRA_CATEGORIA";
+    public static final String EXTRA_TITULO = "EXTRA_TITULO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,17 @@ public class ListaFilmesActivity extends AppCompatActivity
         recycler_filmes = findViewById(R.id.recycler_filmes);
 
         final Categoria categoria = (Categoria) getIntent().getSerializableExtra(EXTRA_CATEGORIA);
+        final String titulo = (String) getIntent().getSerializableExtra(EXTRA_TITULO);
 
         configuraAdapter();
 
         presenter = new ListaFilmesPresenter(categoria, this);
-        presenter.obtemFilmes();
+        if(titulo == null){
+            presenter.obtemFilmes();
+        }
+        else {
+            presenter.pesquisaFilmes(titulo);
+        }
     }
 
     @Override

@@ -49,6 +49,32 @@ public class ListaFilmesPresenter implements ListaFilmesContrato.ListaFilmesPres
     }
 
     @Override
+    public void pesquisaFilmes(String titulo) {
+        ApiService.getFilmeInstance()
+                .listarFilmesPorTitulo("dd56ac784462a1c32ad07a07c2a9c494", "pt-BR", titulo)
+                .enqueue(new Callback<FilmesResult>() {
+                    @Override
+                    public void onResponse(Call<FilmesResult> call, Response<FilmesResult> response) {
+                        if(response.isSuccessful()) {
+                            final List<Filme> listaFilmes = FilmeMapper
+                                    .deResponseParaDominio(response.body()
+                                            .getResultadoFilmes());
+
+                            view.mostraFilmes(listaFilmes);
+                        }
+                        else {
+                            view.mostraErro();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FilmesResult> call, Throwable t) {
+                        view.mostraErro();
+                    }
+                });
+    }
+
+    @Override
     public void destruirView() {
         this.view = null;
     }
